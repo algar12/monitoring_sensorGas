@@ -3,12 +3,14 @@
  * Cyber-Industrial Layout Wrapper
  */
 
-
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
 const MainLayout = ({ children, isConnected, onSettingsClick, currentView, onViewChange }) => {
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background flex overflow-hidden selection:bg-primary/30 selection:text-primary-100">
@@ -18,8 +20,24 @@ const MainLayout = ({ children, isConnected, onSettingsClick, currentView, onVie
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
       </div>
 
+      {/* Mobile Backdrop */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden animate-fade-in"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <Sidebar currentView={currentView} onViewChange={onViewChange} />
+      <Sidebar
+        currentView={currentView}
+        onViewChange={(view) => {
+          onViewChange(view);
+          setIsMobileMenuOpen(false);
+        }}
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col relative z-10 h-screen">
@@ -28,6 +46,7 @@ const MainLayout = ({ children, isConnected, onSettingsClick, currentView, onVie
           isConnected={isConnected}
           currentView={currentView}
           onSettingsClick={onSettingsClick}
+          onMenuToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         />
 
         {/* Content */}

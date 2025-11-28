@@ -3,10 +3,10 @@
  * Cyber-Industrial Header with Breadcrumbs and Actions
  */
 
-import { Settings as SettingsIcon, ChevronRight, Bell, Search } from 'lucide-react';
+import { Settings as SettingsIcon, ChevronRight, Bell, Search, Menu } from 'lucide-react';
 import PropTypes from 'prop-types';
 
-const Header = ({ currentView, onSettingsClick }) => {
+const Header = ({ currentView, onSettingsClick, onMenuToggle }) => {
   const viewTitles = {
     dashboard: 'MISSION CONTROL',
     analytics: 'DATA ANALYTICS',
@@ -18,16 +18,26 @@ const Header = ({ currentView, onSettingsClick }) => {
   return (
     <header className="h-16 lg:h-20 bg-surface/50 backdrop-blur-sm border-b border-white/5 flex items-center justify-between px-4 lg:px-8 sticky top-0 z-30">
       {/* Breadcrumb / Title */}
-      <div className="flex flex-col">
-        <div className="flex items-center gap-2 text-xs font-mono text-slate-400 mb-1">
-          <span>MAIN</span>
-          <ChevronRight size={12} />
-          <span className="text-primary tracking-wider uppercase">{currentView}</span>
+      <div className="flex items-center gap-4">
+        {/* Mobile Menu Toggle */}
+        <button
+          onClick={onMenuToggle}
+          className="lg:hidden p-2 -ml-2 text-slate-400 hover:text-white transition-colors"
+        >
+          <Menu size={24} />
+        </button>
+
+        <div className="flex flex-col">
+          <div className="flex items-center gap-2 text-xs font-mono text-slate-400 mb-1">
+            <span className="hidden sm:inline">MAIN</span>
+            <ChevronRight size={12} className="hidden sm:block" />
+            <span className="text-primary tracking-wider uppercase">{currentView}</span>
+          </div>
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight flex items-center gap-3">
+            {viewTitles[currentView] || 'DASHBOARD'}
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse hidden lg:block" />
+          </h2>
         </div>
-        <h2 className="text-xl lg:text-2xl font-bold text-white tracking-tight flex items-center gap-3">
-          {viewTitles[currentView] || 'DASHBOARD'}
-          <div className="w-2 h-2 bg-primary rounded-full animate-pulse hidden lg:block" />
-        </h2>
       </div>
 
       {/* Actions */}
@@ -66,6 +76,7 @@ const Header = ({ currentView, onSettingsClick }) => {
 Header.propTypes = {
   currentView: PropTypes.string.isRequired,
   onSettingsClick: PropTypes.func.isRequired,
+  onMenuToggle: PropTypes.func,
 };
 
 export default Header;
