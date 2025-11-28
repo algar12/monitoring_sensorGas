@@ -38,7 +38,7 @@ export const SMOKE_UI_CONFIG = {
 // Gas Level Thresholds (PPM)
 export const GAS_THRESHOLDS = {
   SAFE_MAX: 300,
-  WARNING_MAX: 100,
+  WARNING_MAX: 600,
 };
 
 // Status Levels
