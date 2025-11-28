@@ -1,0 +1,19 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'firebase-vendor': ['firebase/app', 'firebase/database'],
+          'chart-vendor': ['chart.js', 'react-chartjs-2'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
+});
