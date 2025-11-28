@@ -37,8 +37,8 @@ export const SMOKE_UI_CONFIG = {
 
 // Gas Level Thresholds (PPM)
 export const GAS_THRESHOLDS = {
-  SAFE_MAX: 50,
-  WARNING_MAX: 50,
+  SAFE_MAX: 300,
+  WARNING_MAX: 100,
 };
 
 // Status Levels
@@ -60,7 +60,7 @@ export const STATUS_CONFIG = {
     textColor: 'text-success-400',
     iconColor: 'text-success-500',
     glowClass: 'shadow-[0_0_20px_rgba(34,197,94,0.3),0_0_40px_rgba(34,197,94,0.1)]',
-    range: '< 50 PPM',
+    range: '< 300 PPM',
   },
   [GAS_STATUS.WARNING]: {
     icon: AlertTriangle,
@@ -71,7 +71,7 @@ export const STATUS_CONFIG = {
     textColor: 'text-warning-400',
     iconColor: 'text-warning-500',
     glowClass: 'shadow-[0_0_20px_rgba(245,158,11,0.3),0_0_40px_rgba(245,158,11,0.1)]',
-    range: '50-100 PPM',
+    range: '100-300 PPM',
     alertTitle: '⚠️ Peringatan',
     alertMessage: 'Tingkat gas mulai meningkat. Mohon perhatikan kondisi area.',
   },
@@ -84,7 +84,7 @@ export const STATUS_CONFIG = {
     textColor: 'text-danger-400',
     iconColor: 'text-danger-500',
     glowClass: 'animate-pulse-danger',
-    range: '> 100 PPM',
+    range: '> 300 PPM',
     alertTitle: '⚠️ PERINGATAN BAHAYA!',
     alertMessage: 'Tingkat gas sangat tinggi! Segera evakuasi dan periksa area.',
   },
