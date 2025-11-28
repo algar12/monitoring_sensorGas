@@ -156,10 +156,6 @@ npm run build
 
 Deploy folder `dist/` ke hosting pilihan Anda (Firebase Hosting, Vercel, Netlify, dll).
 
-## 📄 Lisensi
 
-MIT
-
----
 
 **Developed with ❤️ using React.js, TailwindCSS, and Firebase**
